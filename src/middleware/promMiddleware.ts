@@ -15,19 +15,20 @@ const httpActiveRequests = new client.Gauge({
 })
 
 // Histogram
-// const httpRequestDuration = new client.Histogram({
-//   name: "http_request_duration_seconds",
-//   help: "HTTP request duration in seconds",
-//   labelNames: ["method", "route", "status"],
-//   buckets: [0.1, 0.5, 1, 2, 5],
-// });
+const httpRequestDuration = new client.Histogram({
+  name: "http_request_duration_seconds",
+  help: "HTTP request duration in seconds",
+  labelNames: ["method", "route", "status"],
+  buckets: [0.1, 0.5, 1, 2, 5],
+});
 
 export const promMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  // const end = httpRequestDuration.startTimer();
+  // Histogram start timer
+  const end = httpRequestDuration.startTimer();
   
   // Increase Gauge here
   httpActiveRequests.inc();
@@ -44,7 +45,8 @@ export const promMiddleware = (
     // Decrease gauge here
     httpActiveRequests.dec();
 
-    // end({ method: req.method, route: req.path, status: res.statusCode });
+    // Histogram end timer
+    end({ method: req.method, route: req.path, status: res.statusCode });
   });
   next();
 };
