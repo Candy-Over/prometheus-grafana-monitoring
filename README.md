@@ -1,3 +1,6 @@
+<img src="https://img.icons8.com/?size=100&id=Ei4ZhVQvIMHE&format=png&color=000000" alt="prometheus"/>
+<img src="https://img.icons8.com/?size=100&id=bMkmDxPRZAld&format=png&color=000000" alt="grafana"/>
+
 ## Links
 
 **Grafana Documentation:** https://grafana.com/tutorials/grafana-fundamentals/#introduction
@@ -89,5 +92,3 @@
 
 - **How it works:** You connect Prometheus as a "data source" in Grafana. Grafana then pulls the metrics and displays them on highly customizable charts, graphs, and heatmaps.
 - **Multi-source Integration:** Grafana is highly versatile; it doesn't just work with Prometheus. You can feed it data from other platforms like Elasticsearch, InfluxDB, or cloud providers.
-
-<img src="" />
