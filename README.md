@@ -7,7 +7,7 @@
 
 **Grafana Documentation:** https://grafana.com/tutorials/grafana-fundamentals/#introduction
 
-### Prometheus:
+## Prometheus:
 
 **Prometheus** is a monitoring system and time-series database. It acts as a data engine, actively scraping metrics from your servers, databases, and applications at regular intervals.
 
@@ -88,13 +88,88 @@
   });
   ```
 
-### Grafana:
+## Grafana:
 
 **Grafana** is an analytics and visualization platform. Because Prometheus focuses purely on data collection and storage, it relies on Grafana to provide the user interface.
 
 - **How it works:** You connect Prometheus as a "data source" in Grafana. Grafana then pulls the metrics and displays them on highly customizable charts, graphs, and heatmaps.
 - **Multi-source Integration:** Grafana is highly versatile; it doesn't just work with Prometheus. You can feed it data from other platforms like Elasticsearch, InfluxDB, or cloud providers.
 
-### Node Exporter:
+## Node Exporter:
 
 - Monitoring agent for Prometheus that collects detailed system-level metrics (CPU, memory, disk I/O, and network usage) from host machines.
+
+`prometheus.tml`
+
+```yaml
+ - job_name: node
+    static_configs:
+      - targets: ['node-exporter:9100']
+```
+
+`docker-compose.yml`
+
+```yaml
+# Node Exporter
+node-exporter:
+  image: prom/node-exporter
+  container_name: node_exporter
+  # network_mode: host
+  # pid: host
+  ports:
+    - 9100:9100
+  volumes:
+    - /proc:/host/proc:ro
+    - /sys:/host/sys:ro
+    - /:/rootfs:ro
+
+  command:
+    - "--path.procfs=/host/proc"
+    - "--path.rootfs=/rootfs"
+    - "--path.sysfs=/host/sys"
+    - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+```
+
+## Loki
+
+- **winston-loki:** https://www.npmjs.com/package/winston-loki?activeTab=readme
+- **winston:** https://www.npmjs.com/package/winston
+
+Logs will be pushed onto winsoton-loki
+
+Setup:
+
+```yaml
+npm install winston winston-loki
+```
+
+**_We are using docker-compose:_**
+
+```yaml
+loki:
+  image: grafana/loki:latest
+  ports:
+    - 3100:3100
+```
+
+`utils/winston.ts`
+
+```jsx
+import { createLogger, transports } from "winston";
+import LokiTransport from "winston-loki";
+
+const options = {
+  transports: [
+    new LokiTransport({
+      host: "http://loki:3100",
+    }),
+  ],
+};
+
+export const logger = createLogger(options);
+```
+
+```jsx
+logger.info("/slow route hit");
+logger.error("Error occured");
+```

@@ -43,6 +43,11 @@ services:
       - "--path.sysfs=/host/sys"
       - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
 
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
+
 volumes:
   grafana_storage: {}
   prometheus_data:

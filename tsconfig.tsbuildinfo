@@ -1,1 +1,1 @@
-{"root":["./src/index.ts"],"version":"6.0.3"}
+{"root":["./src/index.ts","./src/middleware/promMiddleware.ts","./src/utils/winston.ts"],"version":"6.0.3"}
