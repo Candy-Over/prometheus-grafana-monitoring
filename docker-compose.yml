@@ -8,10 +8,22 @@ services:
     ports:
       - 8000:8000
 
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node_exporter
+    network_mode: host
+    pid: host
+    ports:
+      - 9100:9100
+    command:
+      - "--path.rootfs=/host"
+
   prometheus:
     image: prom/prometheus
     ports:
       - 9090:9090
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
 
