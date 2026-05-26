@@ -94,3 +94,7 @@
 
 - **How it works:** You connect Prometheus as a "data source" in Grafana. Grafana then pulls the metrics and displays them on highly customizable charts, graphs, and heatmaps.
 - **Multi-source Integration:** Grafana is highly versatile; it doesn't just work with Prometheus. You can feed it data from other platforms like Elasticsearch, InfluxDB, or cloud providers.
+
+### Node Exporter:
+
+- Monitoring agent for Prometheus that collects detailed system-level metrics (CPU, memory, disk I/O, and network usage) from host machines.
