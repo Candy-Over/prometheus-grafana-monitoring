@@ -1,5 +1,7 @@
-<img src="https://img.icons8.com/?size=100&id=Ei4ZhVQvIMHE&format=png&color=000000" alt="prometheus"/>
-<img src="https://img.icons8.com/?size=100&id=bMkmDxPRZAld&format=png&color=000000" alt="grafana"/>
+<div>
+  <img src="https://img.icons8.com/?size=100&id=Ei4ZhVQvIMHE&format=png&color=000000" alt="prometheus"/>
+  <img src="https://img.icons8.com/?size=100&id=bMkmDxPRZAld&format=png&color=000000" alt="grafana"/>
+</div>
 
 ## Links
 
